@@ -1,0 +1,75 @@
+.tab-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  padding-bottom: var(--safe-bottom);
+  background: rgba(15, 15, 24, 0.85);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  border-top: 1px solid var(--border);
+}
+
+.tab-bar-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  height: var(--tab-bar-h);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.tab-item { display: flex; align-items: center; justify-content: center; height: 100%; }
+
+.tab-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 44px;
+  color: var(--text-muted);
+  transition: color 0.18s ease;
+  border-radius: var(--r-pill);
+}
+
+.tab-link.is-active { color: var(--accent); }
+.tab-link:not(.is-active):active { color: var(--text-secondary); }
+
+.tab-icon { position: relative; z-index: 1; transition: transform 0.18s ease; }
+.tab-link.is-active .tab-icon { transform: translateY(-1px); }
+
+.tab-indicator {
+  position: absolute;
+  inset: 0;
+  background: rgba(124, 92, 255, 0.14);
+  border-radius: var(--r-pill);
+}
+
+/* ─── FAB ────────────────────────────────────────── */
+.tab-fab-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.tab-fab {
+  position: absolute;
+  top: -22px;                     /* raise above the bar */
+  width: 56px;
+  height: 56px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-fab);
+  transition: transform 0.08s ease;
+}
+
+.tab-fab:active { transform: scale(0.94); }

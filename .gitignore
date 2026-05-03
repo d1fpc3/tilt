@@ -1,0 +1,16 @@
+node_modules
+dist
+dist-ssr
+.env
+.env.local
+.env.*.local
+.DS_Store
+*.local
+.vite
+coverage
+.idea
+.vscode/*
+!.vscode/extensions.json
+ios
+android
+.supabase

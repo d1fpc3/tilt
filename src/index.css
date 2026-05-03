@@ -1,0 +1,161 @@
+/* ─── Tilt design tokens ─────────────────────────────── */
+:root {
+  /* Surfaces (dark-first) */
+  --bg-app:        #060609;
+  --bg-card:       #0f0f18;
+  --bg-input:      #14141f;
+  --bg-elevated:   #1a1a28;
+
+  /* Border */
+  --border:        #1c1c2e;
+  --border-light:  #252540;
+
+  /* Text */
+  --text-primary:   #f5f5fa;
+  --text-secondary: #c8c8d8;
+  --text-muted:     #8888b0;
+  --text-faint:     #44446a;
+
+  /* Brand + state */
+  --accent:    #7c5cff;          /* Tilt brand purple */
+  --accent-2:  #5d3eff;
+  --green:     #05d890;
+  --red:       #ff3d5a;
+  --orange:    #ff9a3c;
+  --yellow:    #f5c84b;
+  --blue:      #4ea3ff;
+  --purple:    #b066ff;
+  --gray:      #6e6e88;
+
+  /* Emotion palette (8 fixed) */
+  --emo-calm:        #05d890;
+  --emo-focused:     #4ea3ff;
+  --emo-anxious:     #f5c84b;
+  --emo-greedy:      #ff9a3c;
+  --emo-frustrated:  #ff3d5a;
+  --emo-euphoric:    #b066ff;
+  --emo-tired:       #6e6e88;
+  --emo-revenge:     #b3142d;
+
+  /* Type */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', ui-monospace, Menlo, monospace;
+
+  /* Radii + shadows */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-pill: 999px;
+  --shadow-card:   0 1px 0 rgba(255,255,255,0.02), 0 8px 24px rgba(0,0,0,0.45);
+  --shadow-fab:    0 8px 24px rgba(124,92,255,0.45);
+
+  /* Layout */
+  --tab-bar-h: 64px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top:    env(safe-area-inset-top, 0px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root { height: 100%; }
+
+body {
+  background: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;            /* iOS Safari: never <16px on inputs */
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+input, textarea, select { font-family: inherit; font-size: 16px; color: inherit; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--r-md); padding: 12px 14px; width: 100%; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent); }
+a { color: var(--accent); text-decoration: none; }
+
+h1, h2, h3 { letter-spacing: -0.02em; font-weight: 800; }
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.1rem; }
+
+/* ─── Layout shells ─────────────────────────────────── */
+.app-shell {
+  min-height: 100dvh;
+  padding-bottom: calc(var(--tab-bar-h) + var(--safe-bottom) + 12px);
+  padding-top: var(--safe-top);
+}
+
+.page {
+  padding: 16px 18px 24px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 18px;
+  box-shadow: var(--shadow-card);
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px;
+}
+.stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+.stat-value { font-size: 1.4rem; font-weight: 800; font-family: var(--font-mono); }
+.stat-sub   { font-size: 0.72rem; color: var(--text-faint); margin-top: 2px; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+@media (min-width: 600px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
+
+/* ─── Buttons ───────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 18px; border-radius: var(--r-md);
+  font-weight: 700; font-size: 0.95rem;
+  background: var(--bg-elevated); color: var(--text-primary);
+  transition: transform 0.06s ease, background 0.15s ease;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--accent); color: white; }
+.btn-primary:hover { background: var(--accent-2); }
+.btn-ghost { background: transparent; border: 1px solid var(--border-light); }
+.btn-block { width: 100%; }
+
+/* ─── Page chrome ───────────────────────────────────── */
+.page-header { margin-bottom: 18px; }
+.page-title { font-size: 1.6rem; }
+.page-subtitle { color: var(--text-muted); font-size: 0.9rem; margin-top: 2px; }
+
+/* ─── Spinners + states ─────────────────────────────── */
+.spinner {
+  display: inline-block; width: 18px; height: 18px;
+  border: 2px solid var(--border-light); border-top-color: var(--accent);
+  border-radius: 50%; animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.empty-state { text-align: center; padding: 48px 20px; color: var(--text-muted); }
+.empty-state-icon { font-size: 2.4rem; margin-bottom: 10px; }
+.empty-state-text { font-weight: 700; color: var(--text-secondary); margin-bottom: 4px; }
+.empty-state-sub { font-size: 0.85rem; }
+
+/* ─── Animations ────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fade-up 0.35s ease both; }
+.delay-1 { animation-delay: 0.05s; }
+.delay-2 { animation-delay: 0.1s; }
+.delay-3 { animation-delay: 0.15s; }
+.delay-4 { animation-delay: 0.2s; }
+.delay-5 { animation-delay: 0.25s; }
+.delay-6 { animation-delay: 0.3s; }
